@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { AuthButton } from '../components/Auth'
+import { Form } from '../components/Form'
 
 export default function LoginPage () {
   return (
@@ -8,12 +8,7 @@ export default function LoginPage () {
         <p>!Estás a un paso!</p>
         <h2 className='text-5xl'>Inicia sesión o crea una nueva cuenta para poder iniciar tu consulta</h2>
       </div>
-      <div className='flex flex-col items-center gap-5'>
-        <AuthButton />
-        <button>
-          <Link href='/'>Continuar como Invitado</Link>
-        </button>
-      </div>
+      <Form />
     </section>
   )
 }
