@@ -1,16 +1,17 @@
 import { Switch, Route } from 'wouter'
+import { Layout } from './components/Layout.jsx'
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 
 function App () {
   return (
-    <Switch>
-      <Route path='/'>
-        <h1 className='text-5xl text-center'>Vetly Ecommerce</h1>
-      </Route>
-      <Route path='/login'>
-        <h1 className='text-5xl text-center'>Login</h1>
-      </Route>
-      <Route>404 Not Found :( </Route>
-    </Switch>
+    <Layout>
+      <Switch>
+        <Route path='/' component={HomePage} />
+        <Route path='/login' component={LoginPage} />
+        <Route>404 Not Found :( </Route>
+      </Switch>
+    </Layout>
   )
 }
 
