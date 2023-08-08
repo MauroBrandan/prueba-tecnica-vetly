@@ -1,6 +1,6 @@
 import { Link } from 'wouter'
 import { useAuth0 } from '@auth0/auth0-react'
-import { User } from './User'
+import { UserNav } from './UserNav'
 
 export function Navbar () {
   const { isAuthenticated } = useAuth0()
@@ -14,17 +14,14 @@ export function Navbar () {
         <input type='search' placeholder='Buscar...' className='w-80 p-2 text-sm border border-gray-300 rounded-lg bg-gray-50' />
       </div>
       <div>
-        <ul className='flex gap-5'>
-          <li className='hover:underline'>
+        <ul className='flex gap-5 [&>li:hover]:underline '>
+          <li>
             <Link href='/'>Home</Link>
           </li>
-          {!isAuthenticated
-            ? (
-              <li className='hover:underline'>
-                <Link href='/login'>Login</Link>
-              </li>
-              )
-            : <User />}
+          {!isAuthenticated && <li><Link href='/login'>Login</Link></li>}
+          <li>
+            <UserNav />
+          </li>
         </ul>
       </div>
     </nav>
