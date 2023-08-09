@@ -36,7 +36,7 @@ export function UserProvider ({ children }) {
 
   const loginAsAdmin = (user, password) => {
     // Aqui se deberia hacer una validacion a una API para poder ingresar como admin
-    if (password === 'admin12345') {
+    if (password === 'admin12345' && isAuthenticated) {
       updateType(user, USERS_TYPES.ADMIN)
     }
   }
