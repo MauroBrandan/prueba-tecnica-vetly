@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useUser } from '../hooks/useUser'
-import { AuthButton } from './Auth'
+import { LoginButton } from './Auth'
 import { AvatarIcon } from './Icons'
 import { Link } from 'wouter'
 
@@ -24,7 +24,7 @@ export function UserNav () {
           <Link href='/user' className='w-52 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
             Mi cuenta
           </Link>
-          <AuthButton />
+          <LoginButton />
         </div>
       </div>
     </div>

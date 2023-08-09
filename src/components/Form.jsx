@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Link, useLocation, Redirect } from 'wouter'
 import { useUser } from '../hooks/useUser'
 import { PickTypeUser } from './PickTypeUser'
-import { AuthButton } from './Auth'
+import { LoginButton, SignUpButton } from './Auth'
 
 export function Form () {
   const { user: authUser, isAuthenticated } = useAuth0()
@@ -25,24 +25,24 @@ export function Form () {
     setLocation('/')
   }
 
-  if (isAuthenticated && user.type) {
+  if (user.type) {
     return <Redirect to='/' />
   }
 
-  if (isAuthenticated && !user.type) {
-    return (
-      <form onSubmit={handleSubmit} className='flex flex-col items-center gap-5'>
-        <PickTypeUser onPick={setUserType} />
-      </form>
-    )
-  }
-
   return (
-    <div className='flex flex-col items-center gap-5'>
-      <AuthButton />
-      <button>
-        <Link href='/'>Continuar como Invitado</Link>
-      </button>
-    </div>
+    <form onSubmit={handleSubmit} className='flex flex-col items-center gap-5'>
+      {isAuthenticated && <PickTypeUser onPick={setUserType} />}
+
+      {!isAuthenticated && (
+        <>
+          <LoginButton />
+          <SignUpButton />
+          <button>
+            <Link href='/'>Continuar como Invitado</Link>
+          </button>
+        </>
+      )}
+
+    </form>
   )
 }
