@@ -1,4 +1,13 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { CategoriesSideBarLoader } from './Loaders'
+
 export function CategoriesSideBar ({ categories, selectCategory }) {
+  const { isLoading } = useAuth0()
+
+  if (isLoading) {
+    return <CategoriesSideBarLoader />
+  }
+
   return (
     <aside className='w-64 h-full'>
       <div className='h-full px-3 py-4 bg-gray-50'>
