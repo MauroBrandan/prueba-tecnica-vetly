@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { USERS_TYPES } from '../utils/consts'
+import { PetsIcon, VetIcon, HospitalIcon } from '../components/Icons.jsx'
 import { saveUserToLocalStorage, getUser, updateUserType } from '../api/users'
 
 export const UserContext = createContext()
@@ -7,6 +9,12 @@ export const UserContext = createContext()
 export function UserProvider ({ children }) {
   const { user: authUser, isAuthenticated } = useAuth0()
   const [user, setUser] = useState({})
+
+  const userTypes = [
+    { id: USERS_TYPES.CLIENT, label: 'Cliente', icon: <PetsIcon /> },
+    { id: USERS_TYPES.PROFESSIONAL, label: 'Profesional', icon: <VetIcon /> },
+    { id: USERS_TYPES.VET, label: 'Veterinaria', icon: <HospitalIcon /> }
+  ]
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -26,7 +34,7 @@ export function UserProvider ({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, loginUser, updateType }}>
+    <UserContext.Provider value={{ user, userTypes, loginUser, updateType }}>
       {children}
     </UserContext.Provider>
   )

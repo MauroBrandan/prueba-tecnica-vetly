@@ -1,13 +1,8 @@
 import { useState } from 'react'
-import { PetsIcon, HospitalIcon, VetIcon } from './Icons.jsx'
-
-const userTypes = [
-  { label: 'Cliente', icon: <PetsIcon /> },
-  { label: 'Profesional', icon: <VetIcon /> },
-  { label: 'Veterinaria', icon: <HospitalIcon /> }
-]
+import { useUser } from '../hooks/useUser'
 
 export function PickTypeUser ({ onPick }) {
+  const { userTypes } = useUser()
   const [selectedType, setSelectedType] = useState(null)
 
   return (
@@ -18,7 +13,7 @@ export function PickTypeUser ({ onPick }) {
           const Icon = () => userType.icon
           return (
             <li key={index} className='inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300'>
-              <input type='radio' id={userType.label} name='userType' onChange={() => setSelectedType(userType.label)} className='hidden peer' />
+              <input type='radio' id={userType.label} name='userType' onChange={() => setSelectedType(userType.id)} className='hidden peer' />
               <label htmlFor={userType.label} className='flex flex-col items-center justify-between w-full p-5 bg-white border-gray-200 rounded-md cursor-pointer transition-all ease-in duration-75 group-hover:bg-opacity-0 group-hover:fill-white peer-checked:bg-opacity-0 peer-checked:fill-white peer-checked:text-white'>
                 <span className='w-28 h-28'>
                   <Icon />
