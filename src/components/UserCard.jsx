@@ -2,18 +2,23 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useUser } from '../hooks/useUser'
 import { AuthButton } from './Auth'
 import { AvatarIcon } from './Icons'
+import { UserCardLoader } from './Loaders'
 
 export function UserCard ({ buttonAction }) {
   const { isAuthenticated, isLoading } = useAuth0()
   const { user } = useUser()
 
   if (isLoading) {
-    return <h2>Loading...</h2> // ToDo: PlaceHolder de UserCard
+    return (
+      <div className='w-full max-w-lg h-96 self-center border-gray-200 rounded-lg shadow'>
+        <UserCardLoader />
+      </div>
+    )
   }
 
   if (isAuthenticated) {
     return (
-      <article className='w-full max-w-lg h-96 self-center bg-white border border-gray-200 rounded-lg shadow flex flex-col items-center justify-center pb-10'>
+      <article className='w-full max-w-lg h-96 self-center bg-white border border-gray-200 rounded-lg shadow flex flex-col items-center justify-center'>
         <img className='w-24 h-24 mb-3 rounded-full shadow-lg' src={user.picture} alt={`${user.name} picture`} />
         <h5 className='mb-1 text-xl font-medium'>{user.name}</h5>
         <span className='text-sm text-gray-500'>{user.type}</span>

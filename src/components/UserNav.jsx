@@ -14,13 +14,9 @@ export function UserNav () {
     setIsShow(!isShow)
   }
 
-  if (isLoading) {
-    return <div>Loading ...</div> // ToDo: Skeleton
-  }
-
   return (
     <div>
-      {isAuthenticated
+      {isAuthenticated && !isLoading
         ? <img onClick={handleClick} className='w-7 h-7 rounded-full cursor-pointer bg-gray-500' src={user.picture} alt={`${user.name} picture`} />
         : <AvatarIcon onClick={handleClick} className='w-5 h-5 cursor-pointer' />}
       <div className={`${isShow ? '' : 'hidden'} absolute right-0 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow`}>

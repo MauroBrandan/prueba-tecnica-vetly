@@ -6,7 +6,7 @@ import { PickTypeUser } from './PickTypeUser'
 import { AuthButton } from './Auth'
 
 export function Form () {
-  const { user: authUser, isAuthenticated, isLoading } = useAuth0()
+  const { user: authUser, isAuthenticated } = useAuth0()
   const { user, loginUser } = useUser()
   const [, setLocation] = useLocation()
   const [userType, setUserType] = useState(null)
@@ -23,10 +23,6 @@ export function Form () {
 
     loginUser(newUser)
     setLocation('/')
-  }
-
-  if (isLoading) {
-    return <p>Loading...</p>
   }
 
   if (isAuthenticated && user.type) {
