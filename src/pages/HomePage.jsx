@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useUser } from '../hooks/useUser'
 import { CategoriesSideBar } from '../components/CategoriesSideBar'
 import { guestCategories } from '../data/categories'
 
 export default function HomePage () {
-  const { user, isAuthenticated } = useAuth0()
+  const { isAuthenticated } = useAuth0()
+  const { user } = useUser()
   const [currentCategory, setCurrentCategory] = useState(null)
   const welcomeText = isAuthenticated ? `¡Bienvenido ${user?.name}! 👋` : '¡Bienvenido a Vetly! 👋'
 

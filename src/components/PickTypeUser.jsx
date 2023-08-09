@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useLocation } from 'wouter'
 import { PetsIcon, HospitalIcon, VetIcon } from './Icons.jsx'
 
 const userTypes = [
@@ -8,19 +7,11 @@ const userTypes = [
   { label: 'Veterinaria', icon: <HospitalIcon /> }
 ]
 
-export function PickTypeUser () {
+export function PickTypeUser ({ onPick }) {
   const [selectedType, setSelectedType] = useState(null)
-  const [, setLocation] = useLocation()
-
-  const handelSubmit = (event) => {
-    event.preventDefault()
-    console.log('Submit!', selectedType)
-    // ToDo: Guardar el tipo elegido el objeto del usuario
-    setLocation('/')
-  }
 
   return (
-    <form onSubmit={handelSubmit}>
+    <>
       <h3 className='mb-5 text-lg font-medium'>Seleccione el tipo de usuario:</h3>
       <ul className='grid w-full gap-6 md:grid-cols-3'>
         {userTypes.map((userType, index) => {
@@ -38,7 +29,7 @@ export function PickTypeUser () {
           )
         })}
       </ul>
-      <button type='submit' className='w-full mt-5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>¡Unirme a Vetly!</button>
-    </form>
+      <button type='submit' onClick={() => onPick(selectedType)} className='w-full mt-5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Seleccionar</button>
+    </>
   )
 }
