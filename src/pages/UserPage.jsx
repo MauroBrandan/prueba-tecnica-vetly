@@ -25,9 +25,11 @@ export default function UserPage () {
         {showEditor && <PickTypeUser onPick={handleEdit} />}
       </form>
 
-      <div className='text-center mt-8'>
-        <button onClick={() => setShowAdminForm(!showAdminForm)} className='bg-white border border-gray-300 hover:bg-gray-100 text-sm rounded-lg px-5 py-2.5'>Entrar como administrador</button>
-      </div>
+      {user.name && (
+        <div className='text-center mt-8'>
+          <button onClick={() => setShowAdminForm(!showAdminForm)} className='bg-white border border-gray-300 hover:bg-gray-100 text-sm rounded-lg px-5 py-2.5'>Entrar como administrador</button>
+        </div>
+      )}
 
       {showAdminForm && <AdminForm closeModal={() => setShowAdminForm(false)} />}
     </section>
