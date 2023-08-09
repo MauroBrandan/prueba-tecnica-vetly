@@ -25,7 +25,7 @@ export function Form () {
     setLocation('/')
   }
 
-  if (user.type) {
+  if (user?.type) {
     return <Redirect to='/' />
   }
 
