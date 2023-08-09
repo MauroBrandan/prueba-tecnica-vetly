@@ -22,6 +22,7 @@ export function UserProvider ({ children }) {
       // Aqui deberiamos llamar a una API para que devuelve el usuario con los permisos
       getUserByEmail(authUser?.email)
         .then(user => setUser(user))
+        .catch(error => console.log(error.message))
     }
   }, [authUser?.email, isAuthenticated])
 
