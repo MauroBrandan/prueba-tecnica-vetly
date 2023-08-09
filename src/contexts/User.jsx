@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { saveUserToLocalStorage, getUser } from '../api/users'
+import { saveUserToLocalStorage, getUser, updateUserType } from '../api/users'
 
 export const UserContext = createContext()
 
@@ -21,8 +21,12 @@ export function UserProvider ({ children }) {
     setUser(user)
   }
 
+  const updateType = (user, type) => {
+    updateUserType(user, type)
+  }
+
   return (
-    <UserContext.Provider value={{ user, loginUser }}>
+    <UserContext.Provider value={{ user, loginUser, updateType }}>
       {children}
     </UserContext.Provider>
   )

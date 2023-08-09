@@ -1,12 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { useUser } from '../hooks/useUser'
 import { AuthButton } from './Auth'
 import { AvatarIcon } from './Icons'
 import { UserCardLoader } from './Loaders'
 
-export function UserCard ({ buttonAction }) {
+export function UserCard ({ user, buttonAction }) {
   const { isAuthenticated, isLoading } = useAuth0()
-  const { user } = useUser()
 
   if (isLoading) {
     return (

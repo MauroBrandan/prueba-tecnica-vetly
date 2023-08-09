@@ -26,3 +26,13 @@ export async function getUser (email) {
     }
   })
 }
+
+export function updateUserType (user, newType) {
+  const users = JSON.parse(localStorage.getItem('users')) || []
+  const existingUserIndex = users.findIndex(existingUser => existingUser.email === user.email)
+
+  if (existingUserIndex === -1) return // Doesn't exists
+
+  users[existingUserIndex].type = newType
+  localStorage.setItem('users', JSON.stringify(users))
+}
