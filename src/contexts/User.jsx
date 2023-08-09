@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { USERS_TYPES } from '../utils/consts'
 import { PetsIcon, VetIcon, HospitalIcon } from '../components/Icons.jsx'
-import { saveUserToLocalStorage, getUser, updateUserType } from '../api/users'
+import { saveUserToLocalStorage, getUserByEmail, updateUserType } from '../api/users'
 
 export const UserContext = createContext()
 
@@ -19,7 +19,7 @@ export function UserProvider ({ children }) {
   useEffect(() => {
     if (isAuthenticated) {
       // Aqui deberiamos llamar a una API para que devuelve el usuario con los permisos
-      getUser(authUser?.email)
+      getUserByEmail(authUser?.email)
         .then(user => setUser(user))
     }
   }, [authUser?.email, isAuthenticated])

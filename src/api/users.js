@@ -15,7 +15,7 @@ export function saveUserToLocalStorage (NewUser) {
   localStorage.setItem('users', JSON.stringify(users))
 }
 
-export async function getUser (email) {
+export async function getUserByEmail (email) {
   return new Promise((resolve, reject) => {
     const users = JSON.parse(localStorage.getItem('users')) || []
     const user = users.find(u => u.email === email)
