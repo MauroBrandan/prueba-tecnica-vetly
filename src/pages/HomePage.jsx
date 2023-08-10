@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Redirect } from 'wouter'
 import { useUser } from '../hooks/useUser'
 import { useCategories } from '../hooks/useCategories'
 import { CategoriesSideBar } from '../components/CategoriesSideBar'
@@ -21,6 +22,12 @@ export default function HomePage () {
 
       setCurrentCategory(newCategory)
     })
+  }
+
+  if (isAuthenticated && !user.type) {
+    return (
+      <Redirect to='/login' />
+    )
   }
 
   return (

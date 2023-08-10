@@ -5,7 +5,7 @@ export const LoginButton = () => {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      logout({ logoutParams: { returnTo: import.meta.env.VITE_WEB_DOMAIN } })
+      logout({ logoutParams: { returnTo: window.location.origin } })
       return
     }
 
@@ -32,7 +32,6 @@ export const SignUpButton = () => {
     loginWithRedirect({
       authorizationParams: {
         screen_hint: 'signup',
-        redirect_uri: `${import.meta.env.VITE_WEB_DOMAIN}/login`,
         ui_locales: 'es'
       }
     })

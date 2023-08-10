@@ -8,7 +8,9 @@ export function AdminForm ({ closeModal }) {
   console.log('La contraseña es admin12345 🤫')
 
   const handleSumbit = (e) => {
+    e.preventDefault()
     loginAsAdmin(user, password)
+    closeModal()
   }
 
   return (

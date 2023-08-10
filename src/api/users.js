@@ -35,4 +35,5 @@ export function updateUserType (user, newType) {
 
   users[existingUserIndex].type = newType
   localStorage.setItem('users', JSON.stringify(users))
+  return users[existingUserIndex]
 }

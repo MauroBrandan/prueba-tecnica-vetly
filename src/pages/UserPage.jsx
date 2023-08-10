@@ -13,7 +13,6 @@ export default function UserPage () {
   const handleEdit = (type) => {
     updateType(user, type)
     setShowEditor(false)
-    window.location.reload()
   }
 
   return (

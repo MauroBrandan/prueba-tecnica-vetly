@@ -32,7 +32,8 @@ export function UserProvider ({ children }) {
   }
 
   const updateType = (user, type) => {
-    updateUserType(user, type) // Aqui deberiamos llamar a una API actualizar el registro en BD
+    const updatedUser = updateUserType(user, type) // Aqui deberiamos llamar a una API actualizar el registro en BD
+    setUser(updatedUser)
   }
 
   const loginAsAdmin = (user, password) => {
