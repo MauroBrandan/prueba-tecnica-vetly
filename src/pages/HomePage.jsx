@@ -31,13 +31,13 @@ export default function HomePage () {
   }
 
   return (
-    <section className='flex gap-5 h-full'>
+    <section className='flex flex-col gap-5 h-full md:flex-row'>
       <CategoriesSideBar categories={isAuthenticated ? categories : guestCategories} selectCategory={selectCategory} />
 
       {currentCategory && <CategoryPage category={currentCategory} />}
 
       {!currentCategory && (
-        <h2 className='w-full text-center text-3xl font-bold py-10'>
+        <h2 className='w-full text-center text-xl font-bold py-10 md:text-3xl'>
           {welcomeText}
         </h2>
       )}

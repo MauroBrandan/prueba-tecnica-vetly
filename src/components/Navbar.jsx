@@ -7,10 +7,10 @@ export function Navbar () {
 
   return (
     <nav className='relative flex flex-wrap items-center justify-between gap-5 mx-auto p-4 border-b-[1px] border-gray-200 container'>
-      <h1 className='self-center text-2xl font-semibold whitespace-nowrap '>
+      <h1 className='self-center text-purple-600 text-2xl md:text-4xl font-bold whitespace-nowrap '>
         <Link href='/'>Vetly</Link>
       </h1>
-      <div>
+      <div className='hidden md:block'>
         <input type='search' placeholder='Buscar...' className='w-80 p-2 text-sm border border-gray-300 rounded-lg bg-gray-50' />
       </div>
       <div>

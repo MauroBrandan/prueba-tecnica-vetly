@@ -9,13 +9,15 @@ export function CategoriesSideBar ({ categories, selectCategory }) {
   }
 
   return (
-    <aside className='w-64 h-full'>
-      <div className='h-full px-3 py-4 bg-gray-50'>
-        <h3 className='text-xl font-bold border-b-2'>Categorías</h3>
-        <ul className='space-y-2 font-medium'>
+    <aside className='w-full h-auto md:w-80 md:h-full'>
+      <div className='h-full px-3 py-4 rounded-lg shadow-lg'>
+        <h3 className='text-xl font-bold border-b-2'>
+          Categorías
+        </h3>
+        <ul className='flex items-center flex-wrap space-y-2 font-medium md:block'>
           {categories.map((category, index) => (
             <li key={index}>
-              <button onClick={() => selectCategory(category)} className='w-full flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100'>
+              <button onClick={() => selectCategory(category)} className='w-full flex items-center p-2 text-gray-900 rounded-lg hover:bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white'>
                 {category.icon}
                 <span className='ml-3'>{category.name}</span>
               </button>
