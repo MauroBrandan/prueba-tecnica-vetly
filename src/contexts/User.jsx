@@ -2,7 +2,8 @@ import { useState, useEffect, createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { USERS_TYPES } from '../utils/consts'
 import { PetsIcon, VetIcon, HospitalIcon, AdminIcon } from '../components/Icons.jsx'
-import { saveUserToLocalStorage, getUserByEmail, updateUserType } from '../api/users'
+import { updateUserType } from '../api/users'
+import { getUserByEmail, registerUser } from '../services/users'
 
 export const UserContext = createContext()
 
@@ -11,24 +12,30 @@ export function UserProvider ({ children }) {
   const [user, setUser] = useState({})
 
   const userTypes = [
-    { id: USERS_TYPES.ADMIN, label: 'Administrador', icon: <AdminIcon /> },
-    { id: USERS_TYPES.CLIENT, label: 'Cliente', icon: <PetsIcon /> },
-    { id: USERS_TYPES.PROFESSIONAL, label: 'Profesional', icon: <VetIcon /> },
-    { id: USERS_TYPES.VET, label: 'Veterinaria', icon: <HospitalIcon /> }
+    { id: 0, label: 'Administrador', icon: <AdminIcon /> },
+    { id: 1, label: 'Cliente', icon: <PetsIcon /> },
+    { id: 2, label: 'Profesional', icon: <VetIcon /> },
+    { id: 3, label: 'Veterinaria', icon: <HospitalIcon /> }
   ]
 
   useEffect(() => {
     if (isAuthenticated) {
-      // Aqui deberiamos llamar a una API para que devuelve el usuario con los permisos
-      getUserByEmail(authUser?.email)
-        .then(user => setUser(user))
-        .catch(error => console.log(error.message))
+      getUser() // Llamado a una API para que devuelve el usuario con los permisos
     }
-  }, [authUser?.email, isAuthenticated])
+  }, [isAuthenticated])
 
-  const loginUser = (user) => {
-    saveUserToLocalStorage(user) // Aqui deberiamos llamar a una API para que registre en BD
-    setUser(user)
+  const getUser = async () => {
+    try {
+      const fetchedUser = await getUserByEmail(authUser.email)
+      setUser(fetchedUser)
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
+
+  const signupUser = (user) => {
+    registerUser(user) // Llamado a una API para que registre en BD
+    getUser()
   }
 
   const updateType = (user, type) => {
@@ -44,7 +51,7 @@ export function UserProvider ({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, userTypes, loginUser, updateType, loginAsAdmin }}>
+    <UserContext.Provider value={{ user, userTypes, signupUser, updateType, loginAsAdmin }}>
       {children}
     </UserContext.Provider>
   )

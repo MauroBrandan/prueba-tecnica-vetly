@@ -7,8 +7,8 @@ import { CategoriesSideBar } from '../components/CategoriesSideBar'
 import CategoryPage from './CategoryPage'
 
 export default function HomePage () {
-  const { isAuthenticated } = useAuth0()
-  const { user } = useUser()
+  const { user, isAuthenticated } = useAuth0()
+  const { user: userContext } = useUser()
   const { categories, guestCategories } = useCategories()
   const [currentCategory, setCurrentCategory] = useState(null)
   const welcomeText = isAuthenticated ? `¡Bienvenido ${user?.name}! 👋` : '¡Bienvenido a Vetly! 👋'
@@ -24,7 +24,7 @@ export default function HomePage () {
     })
   }
 
-  if (isAuthenticated && !user.type) {
+  if (isAuthenticated && !userContext.type) {
     return (
       <Redirect to='/login' />
     )

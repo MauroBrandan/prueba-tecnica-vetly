@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { useUser } from '../hooks/useUser'
 import { LoginButton } from './Auth'
 import { AvatarIcon } from './Icons'
 import { Link } from 'wouter'
 
 export function UserNav () {
   const [isShow, setIsShow] = useState(false)
-  const { isAuthenticated, isLoading } = useAuth0()
-  const { user } = useUser()
+  const { user, isAuthenticated, isLoading } = useAuth0()
 
   const handleClick = () => {
     setIsShow(!isShow)

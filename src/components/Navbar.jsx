@@ -1,10 +1,7 @@
 import { Link } from 'wouter'
-import { useAuth0 } from '@auth0/auth0-react'
 import { UserNav } from './UserNav'
 
 export function Navbar () {
-  const { isAuthenticated } = useAuth0()
-
   return (
     <nav className='relative flex flex-wrap items-center justify-between gap-5 mx-auto p-4 border-b-[1px] border-gray-200 container'>
       <h1 className='self-center text-purple-600 text-2xl md:text-4xl font-bold whitespace-nowrap '>
@@ -18,7 +15,7 @@ export function Navbar () {
           <li>
             <Link href='/'>Home</Link>
           </li>
-          {!isAuthenticated && <li><Link href='/login'>Login</Link></li>}
+          <li><Link href='/login'>Login</Link></li>
           <li>
             <UserNav />
           </li>

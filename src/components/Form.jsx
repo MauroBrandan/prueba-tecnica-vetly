@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { Link, useLocation, Redirect } from 'wouter'
+import { Link, useLocation } from 'wouter'
 import { useUser } from '../hooks/useUser'
 import { PickTypeUser } from './PickTypeUser'
 import { LoginButton, SignUpButton } from './Auth'
 
 export function Form () {
   const { user: authUser, isAuthenticated } = useAuth0()
-  const { user, loginUser } = useUser()
+  const { user, signupUser } = useUser()
   const [, setLocation] = useLocation()
   const [userType, setUserType] = useState(null)
 
@@ -16,26 +16,21 @@ export function Form () {
 
     const newUser = {
       email: authUser.email,
-      name: authUser.name,
-      picture: authUser.picture,
       type: userType
     }
 
-    loginUser(newUser)
-    setLocation('/')
-  }
-
-  if (user?.type) {
-    return <Redirect to='/' />
+    signupUser(newUser)
+    setLocation('/login')
   }
 
   return (
     <form onSubmit={handleSubmit} className='flex flex-col items-center gap-5'>
-      {isAuthenticated && <PickTypeUser onPick={setUserType} />}
+      {(isAuthenticated && !user.type) && <PickTypeUser onPick={setUserType} />}
+
+      <LoginButton />
 
       {!isAuthenticated && (
         <>
-          <LoginButton />
           <SignUpButton />
           <button>
             <Link href='/'>Continuar como Invitado</Link>

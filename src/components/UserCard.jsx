@@ -6,8 +6,8 @@ import { UserCardLoader } from './Loaders'
 
 export function UserCard ({ user, buttonAction }) {
   const { isAuthenticated, isLoading } = useAuth0()
-  const { userTypes } = useUser()
-  const userType = userTypes.find(type => type.id === user.type)
+  const { userTypes, user: userContext } = useUser()
+  const userType = userTypes.find(type => type.id === userContext.type)
 
   if (isLoading) {
     return (
@@ -20,8 +20,8 @@ export function UserCard ({ user, buttonAction }) {
   if (isAuthenticated) {
     return (
       <article className='w-full max-w-lg h-96 self-center bg-white border border-gray-200 rounded-lg shadow flex flex-col items-center justify-center'>
-        <img className='w-24 h-24 mb-3 rounded-full shadow-lg' src={user.picture} alt={`${user.name} picture`} />
-        <h5 className='mb-1 text-xl font-medium'>{user.name}</h5>
+        <img className='w-24 h-24 mb-3 rounded-full shadow-lg' src={user?.picture} alt={`${user?.name} picture`} />
+        <h5 className='mb-1 text-xl font-medium'>{user?.name}</h5>
         <div className='inline-flex items-center justify-center gap-1'>
           <span className='w-8'>{userType?.icon}</span>
           <span className='text-lg text-gray-500'>{userType?.label}</span>
