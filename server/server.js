@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import { getAllItems, saveItem } from './db/index.js'
 
 const USER_TYPES = ['ADMIN', 'CLIENTE', 'PROFESIONAL', 'VETERINARIA']
@@ -7,6 +8,7 @@ const app = express()
 const port = 5555
 
 app.use(express.json())
+app.use(cors())
 
 // Endpoint to get all users
 app.get('/api/Usuarios', (req, res) => {
