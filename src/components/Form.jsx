@@ -20,7 +20,7 @@ export function Form () {
     }
 
     signupUser(newUser)
-    setLocation('/login')
+    setLocation('/')
   }
 
   return (
