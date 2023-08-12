@@ -23,6 +23,13 @@ Crear un archivo `.env.local`. Con las siguientes variables de entorno:
 ```bash
 VITE_AUTH0_DOMAIN=
 VITE_AUTH0_CLIENT_ID=
+VITE_API_URL=http://localhost:5555
+```
+
+Correr servidor:
+
+```bash
+npm run server
 ```
 
 Correr aplicación en modo de desarrollo
@@ -86,6 +93,21 @@ Use dos APIs fake para obtener los datos:
 - ✅ Mostrar una pagina en blanco con el nombre de la categoría
   - Pagina dinámica: `CategoryPage`
 
+> 4- Server
+
+Luego que me pasaron el archivo con el uso de las APIs:
+
+- ✅ Servidor con Express para exponer los endpoints y manejar la “base de datos” (archivos json)
+  - `GET /api/Usuarios`
+  - `POST /api/Usuario/RegistrarUsuario`
+  - `POST /api/Usuario/LoginPerfilByEmail`
+  - `PATCH /api/Usuario/ActualizarUsuario`
+  - `GET /api/CategoriasProducto/getCategoriasProducto`
+  - `GET /api/CategoriasProducto/getCategoriasProducto/:user-type`
+- ✅ En el frontend cree los servicios para consumir estas APIs
+- ✅ `useContext` para llamar a los servicios y manejar el contexto de la aplicación
+- ✅ Agregue Facebook como método de autenticación
+
 ### A mejorar
 
-Se pueden mejorar bastante los estilos, en especial en mobile. Además de agregar Testing, por lo menos los mas importantes.
+Se pueden mejorar los estilos y agregar testing, por lo menos los mas importantes.
