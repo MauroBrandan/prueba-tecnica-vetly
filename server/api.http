@@ -20,6 +20,15 @@ Content-Type: application/json
 	"email": "maurobrandan.mb@gmail.com"
 }
 
+### Update user type
+PATCH http://localhost:5555/api/Usuario/ActualizarUsuario
+Content-Type: application/json
+
+{
+  "email": "maurobrandan.mb@gmail.com",
+  "idNewType": 3
+}
+
 ### Get all categories
 GET http://localhost:5555/api/CategoriasProducto/getCategoriasProducto
 

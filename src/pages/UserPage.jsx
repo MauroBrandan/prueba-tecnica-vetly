@@ -12,7 +12,7 @@ export default function UserPage () {
   const { updateType } = useUser()
 
   const handleEdit = (type) => {
-    updateType(user, type)
+    updateType(user.email, type)
     setShowEditor(false)
   }
 

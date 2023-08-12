@@ -1,9 +1,7 @@
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, useCallback, createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { USERS_TYPES } from '../utils/consts'
 import { PetsIcon, VetIcon, HospitalIcon, AdminIcon } from '../components/Icons.jsx'
-import { updateUserType } from '../api/users'
-import { getUserByEmail, registerUser } from '../services/users'
+import { getUserByEmail, registerUser, updateUserType } from '../services/users'
 
 export const UserContext = createContext()
 
@@ -18,35 +16,38 @@ export function UserProvider ({ children }) {
     { id: 3, type: 'VETERINARIA', label: 'Veterinaria', icon: <HospitalIcon /> }
   ]
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      getUser() // Llamado a una API para que devuelve el usuario con los permisos
-    }
-  }, [isAuthenticated])
-
-  const getUser = async () => {
+  const getUser = useCallback(async () => {
     try {
       const fetchedUser = await getUserByEmail(authUser.email)
       setUser(fetchedUser)
     } catch (error) {
       console.error('Error:', error)
     }
-  }
+  }, [authUser?.email])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUser() // Llamado a una API para que devuelve el usuario con los permisos
+    }
+  }, [isAuthenticated, getUser])
 
   const signupUser = (user) => {
     registerUser(user) // Llamado a una API para que registre en BD
     getUser()
   }
 
-  const updateType = (user, type) => {
-    const updatedUser = updateUserType(user, type) // Aqui deberiamos llamar a una API actualizar el registro en BD
-    setUser(updatedUser)
+  const updateType = async (email, type) => {
+    updateUserType(email, type) // Llamado a una API para actualizar el registro en BD
+    setUser({
+      email,
+      type: userTypes[type].type
+    })
   }
 
   const loginAsAdmin = (user, password) => {
     // Aqui se deberia hacer una validacion a una API para poder ingresar como admin
     if (password === 'admin12345') {
-      updateType(user, USERS_TYPES.ADMIN)
+      updateType(user.email, 0)
     }
   }
 

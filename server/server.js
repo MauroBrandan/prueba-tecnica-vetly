@@ -57,6 +57,27 @@ app.post('/api/Usuario/LoginPerfilByEmail', (req, res) => {
   res.send()
 })
 
+// Endpoint to update user type
+app.patch('/api/Usuario/ActualizarUsuario', (req, res) => {
+  const { email, idNewType } = req.body
+  const users = getAllItems()
+  const userIndex = users.findIndex(user => user.email === email)
+  const userType = USER_TYPES[idNewType] || USER_TYPES[1]
+
+  if (userIndex === -1) { // Doesn't exists
+    res.status(404).json({ message: 'Usuario no encontrado' })
+    return
+  }
+
+  users[userIndex].tipo_usuario = userType
+  saveItem(users)
+
+  res.status(200).json({
+    message: 'Usuario actualizado exitosamente',
+    updatedUser: users[userIndex]
+  })
+})
+
 // Endpoint to get all categories
 app.get('/api/CategoriasProducto/getCategoriasProducto', (req, res) => {
   const categoriesJSON = getAllItems('categories')

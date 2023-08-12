@@ -50,3 +50,27 @@ export async function registerUser (user) {
     throw error
   }
 }
+
+export async function updateUserType (email, type) {
+  const newUser = {
+    email,
+    idNewType: type
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/api/Usuario/ActualizarUsuario`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+
+    if (!response.ok) {
+      throw new Error('Error al actualizar el usuario')
+    }
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
