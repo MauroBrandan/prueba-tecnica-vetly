@@ -18,7 +18,7 @@ export function UserProvider ({ children }) {
 
   const getUser = useCallback(async () => {
     try {
-      const fetchedUser = await getUserByEmail(authUser.email)
+      const fetchedUser = await getUserByEmail(authUser.email) // Llamado a una API para que devuelve el usuario con los permisos
       setUser(fetchedUser)
     } catch (error) {
       console.error('Error:', error)
@@ -27,13 +27,16 @@ export function UserProvider ({ children }) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      getUser() // Llamado a una API para que devuelve el usuario con los permisos
+      getUser()
     }
   }, [isAuthenticated, getUser])
 
   const signupUser = (user) => {
     registerUser(user) // Llamado a una API para que registre en BD
-    getUser()
+    setUser({
+      email: user.email,
+      type: userTypes[user.type].type
+    })
   }
 
   const updateType = async (email, type) => {
