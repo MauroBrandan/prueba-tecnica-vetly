@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react'
-import { getCategories } from '../api/categories'
+import { getCategoriesByUserType } from '../services/categories'
 import { useUser } from './useUser'
 
 export function useCategories () {
   const { user } = useUser()
   const [categories, setCategories] = useState([])
-  const guestCategories = getCategories() // Aqui deberia ser el llamado a una API. Sin argumentos, para obtener las categorias por default
 
   useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const fetchedCategories = await getCategoriesByUserType(user.type) // Llamado a una API para obtener las categorias especificas para el tipo de usuario
+        setCategories(fetchedCategories)
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+
     if (user) {
-      const categories = getCategories(user.type) // Aqui deberia ser el llamado a una API. Con argumentos, para obtener la categoria especifica
-      setCategories(categories)
+      getCategories()
     }
   }, [user])
 
-  return { categories, guestCategories }
+  return { categories }
 }

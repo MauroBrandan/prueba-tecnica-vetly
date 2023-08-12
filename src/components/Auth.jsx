@@ -32,7 +32,8 @@ export const SignUpButton = () => {
     loginWithRedirect({
       authorizationParams: {
         screen_hint: 'signup',
-        ui_locales: 'es'
+        ui_locales: 'es',
+        redirect_uri: `${window.location.origin}/login`
       }
     })
   }

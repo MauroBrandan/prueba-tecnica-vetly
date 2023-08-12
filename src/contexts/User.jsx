@@ -12,10 +12,10 @@ export function UserProvider ({ children }) {
   const [user, setUser] = useState({})
 
   const userTypes = [
-    { id: 0, label: 'Administrador', icon: <AdminIcon /> },
-    { id: 1, label: 'Cliente', icon: <PetsIcon /> },
-    { id: 2, label: 'Profesional', icon: <VetIcon /> },
-    { id: 3, label: 'Veterinaria', icon: <HospitalIcon /> }
+    { id: 0, type: 'ADMIN', label: 'Administrador', icon: <AdminIcon /> },
+    { id: 1, type: 'CLIENTE', label: 'Cliente', icon: <PetsIcon /> },
+    { id: 2, type: 'PROFESIONAL', label: 'Profesional', icon: <VetIcon /> },
+    { id: 3, type: 'VETERINARIA', label: 'Veterinaria', icon: <HospitalIcon /> }
   ]
 
   useEffect(() => {

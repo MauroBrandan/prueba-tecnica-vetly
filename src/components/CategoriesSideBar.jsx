@@ -15,8 +15,8 @@ export function CategoriesSideBar ({ categories, selectCategory }) {
           Categorías
         </h3>
         <ul className='flex items-center flex-wrap space-y-2 font-medium md:block'>
-          {categories.map((category, index) => (
-            <li key={index}>
+          {categories.map((category) => (
+            <li key={category.id}>
               <button onClick={() => selectCategory(category)} className='w-full flex items-center p-2 text-gray-900 rounded-lg hover:bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white'>
                 {category.icon}
                 <span className='ml-3'>{category.name}</span>

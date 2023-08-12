@@ -19,7 +19,7 @@ export default function UserPage () {
   return (
     <section className='h-full flex flex-col'>
       <h2 className='text-3xl font-bold py-5'>Mi Cuenta</h2>
-      <UserCard user={user} buttonAction={() => setShowEditor(!showEditor)} />
+      <UserCard buttonAction={() => setShowEditor(!showEditor)} />
 
       <form>
         {showEditor && <PickTypeUser onPick={handleEdit} />}

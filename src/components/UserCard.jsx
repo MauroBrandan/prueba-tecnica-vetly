@@ -4,10 +4,10 @@ import { LoginButton } from './Auth'
 import { AvatarIcon } from './Icons'
 import { UserCardLoader } from './Loaders'
 
-export function UserCard ({ user, buttonAction }) {
-  const { isAuthenticated, isLoading } = useAuth0()
-  const { userTypes, user: userContext } = useUser()
-  const userType = userTypes.find(type => type.id === userContext.type)
+export function UserCard ({ buttonAction }) {
+  const { user, isAuthenticated, isLoading } = useAuth0()
+  const { userTypes, user: contextUser } = useUser()
+  const userType = userTypes.find(userType => userType.type === contextUser.type)
 
   if (isLoading) {
     return (
