@@ -25,11 +25,11 @@ export const LoginButton = () => {
   )
 }
 
-export const SignUpButton = () => {
-  const { loginWithRedirect } = useAuth0()
+export const SignUpButton = ({ disabled }) => {
+  const { loginWithPopup } = useAuth0()
 
   const handleClick = () => {
-    loginWithRedirect({
+    loginWithPopup({
       authorizationParams: {
         screen_hint: 'signup',
         ui_locales: 'es',
@@ -39,7 +39,7 @@ export const SignUpButton = () => {
   }
 
   return (
-    <button onClick={handleClick} className='w-52 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300'>
+    <button type='button' disabled={disabled} onClick={handleClick} className='w-52 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:opacity-50 disabled:pointer-events-none'>
       <span className='w-52 px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0'>
         ¡Unirme a Vetly!
       </span>
