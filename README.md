@@ -1,7 +1,5 @@
 # Prueba Técnica - Frontend
 
-🚀 Deploy: https://vetly.vercel.app/
-
 ### Tecnologías
 
 - Vite + React
