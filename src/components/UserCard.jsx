@@ -4,7 +4,7 @@ import { LoginButton } from './Auth'
 import { AvatarIcon } from './Icons'
 import { UserCardLoader } from './Loaders'
 
-export function UserCard ({ buttonAction }) {
+export function UserCard () {
   const { user, isAuthenticated, isLoading } = useAuth0()
   const { userTypes, user: contextUser } = useUser()
   const userType = userTypes.find(userType => userType.type === contextUser.type)
@@ -27,9 +27,6 @@ export function UserCard ({ buttonAction }) {
           <span className='text-lg text-gray-500'>{userType?.label}</span>
         </div>
         <div className='flex flex-col gap-5 mt-4 md:mt-6'>
-          <button onClick={buttonAction} className='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
-            Editar
-          </button>
           <LoginButton />
         </div>
       </article>
